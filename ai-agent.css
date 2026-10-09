@@ -1,0 +1,69 @@
+/* Avia — AI Agent styles for $SBLCT */
+.avia-btn {
+  position: fixed; right: 20px; bottom: 80px; z-index: 9998;
+  background: linear-gradient(135deg, #FFA500 0%, #FFC34D 100%);
+  color: #0A0E27; border: none; border-radius: 50px;
+  padding: 12px 20px; font-weight: 700; font-size: 14px; cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 8px 32px rgba(255,165,0,0.6); transition: 0.3s;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+.avia-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(255,165,0,0.9); }
+.avia-btn-hidden { opacity: 0; pointer-events: none; transform: scale(0.8); }
+.avia-btn-icon { font-size: 18px; }
+
+.avia-window {
+  position: fixed; right: 20px; bottom: 80px;
+  width: 400px; max-width: calc(100vw - 40px);
+  height: 600px; max-height: calc(100vh - 120px);
+  background: linear-gradient(160deg, #0A0E27 0%, #1F180F 100%);
+  border: 1px solid rgba(255,165,0,0.4); border-radius: 20px;
+  z-index: 9999; display: flex; flex-direction: column; overflow: hidden;
+  opacity: 0; transform: translateY(20px) scale(0.95); pointer-events: none;
+  transition: 0.3s; box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 40px rgba(255,165,0,0.3);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+.avia-window.avia-open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+
+.avia-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px; background: rgba(31,24,15,0.8); border-bottom: 1px solid rgba(255,165,0,0.3);
+}
+.avia-header-left { display: flex; align-items: center; gap: 10px; }
+.avia-avatar { width: 36px; height: 36px; border-radius: 50%; border: 2px solid #FFA500; object-fit: cover; }
+.avia-name { font-size: 15px; font-weight: 700; color: #fff; }
+.avia-status { font-size: 11px; color: #8A94C8; }
+.avia-close { background: transparent; border: none; color: #8A94C8; font-size: 26px; cursor: pointer; line-height: 1; padding: 0 6px; }
+.avia-close:hover { color: #FFA500; }
+
+.avia-messages { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.avia-messages::-webkit-scrollbar { width: 6px; }
+.avia-messages::-webkit-scrollbar-thumb { background: rgba(255,165,0,0.3); border-radius: 3px; }
+
+.avia-msg { display: flex; max-width: 92%; }
+.avia-msg-user { align-self: flex-end; justify-content: flex-end; }
+.avia-msg-agent { align-self: flex-start; }
+
+.avia-bubble { padding: 10px 14px; border-radius: 14px; font-size: 13px; line-height: 1.55; word-wrap: break-word; }
+.avia-msg-user .avia-bubble { background: linear-gradient(135deg, #FFA500 0%, #FFC34D 100%); color: #0A0E27; border-bottom-right-radius: 4px; font-weight: 500; }
+.avia-msg-agent .avia-bubble { background: rgba(31,24,15,0.9); color: #E0E6FF; border: 1px solid rgba(255,165,0,0.2); border-bottom-left-radius: 4px; }
+.avia-msg-agent .avia-bubble strong { color: #FFA500; }
+.avia-msg-agent .avia-bubble code { background: rgba(255,165,0,0.1); color: #FFA500; padding: 1px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 11px; word-break: break-all; }
+.avia-msg-agent .avia-bubble a { color: #FFC34D; text-decoration: none; word-break: break-all; }
+.avia-msg-agent .avia-bubble a:hover { text-decoration: underline; }
+
+.avia-suggestions { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 16px; border-top: 1px solid rgba(255,165,0,0.2); max-height: 160px; overflow-y: auto; }
+.avia-suggestion { background: rgba(255,165,0,0.08); border: 1px solid rgba(255,165,0,0.25); color: #FFA500; padding: 6px 10px; border-radius: 20px; font-size: 11px; cursor: pointer; transition: 0.2s; font-family: 'Segoe UI', system-ui, sans-serif; white-space: nowrap; }
+.avia-suggestion:hover { background: rgba(255,165,0,0.2); border-color: #FFA500; }
+
+.avia-external { display: flex; gap: 6px; padding: 10px 16px; border-top: 1px solid rgba(255,165,0,0.2); background: rgba(6,9,32,0.6); }
+.avia-external a { flex: 1; text-align: center; padding: 8px 6px; border-radius: 10px; background: rgba(255,165,0,0.08); border: 1px solid rgba(255,165,0,0.2); color: #FFA500; text-decoration: none; font-size: 11px; font-weight: 600; transition: 0.2s; }
+.avia-external a:hover { background: rgba(255,165,0,0.2); border-color: #FFA500; }
+
+.avia-footer { text-align: center; padding: 8px 12px; font-size: 10px; color: #3A406A; background: rgba(6,9,32,0.8); border-top: 1px solid rgba(255,165,0,0.2); }
+
+@media (max-width: 480px) {
+  .avia-window { right: 10px; bottom: 10px; width: calc(100vw - 20px); height: calc(100vh - 20px); max-height: calc(100vh - 20px); border-radius: 16px; }
+  .avia-btn { right: 12px; bottom: 72px; padding: 10px 16px; font-size: 13px; }
+  .avia-btn-label { display: none; }
+}
