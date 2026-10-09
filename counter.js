@@ -1,4 +1,4 @@
-/* $SBLCT — Counter for AviaTrust guarantee layer (no holders) */
+/* €SBLCT — Counter for AviaTrust guarantee layer (no holders) */
 (function(){
   var START_VISITORS = 2030;
   var START_CLIENTS  = 0;
