@@ -1,4 +1,4 @@
-/* Avia — Scripted AI Bot for $SBLCT Standby Letter of Credit Token */
+/* Avia — Scripted AI Bot for €SBLCT Standby Letter of Credit Token */
 (function () {
   'use strict';
   var state = { isOpen: false };
@@ -6,15 +6,15 @@
 
   var KB = {
     'what': {
-      title: 'What is $SBLCT?',
+      title: 'What is €SBLCT?',
       answer: [
-        '**$SBLCT (Standby Letter of Credit Token)** — the guarantee layer of AviaTrust on Solana.',
+        '**€SBLCT (Standby Letter of Credit Token)** — the guarantee layer of AviaTrust on Solana.',
         '',
-        'SBLCT represents a **Standby Letter of Credit** (SBLC) — a bank instrument used as a payment guarantee in international trade.',
+        '€SBLCT represents a **Standby Letter of Credit** (SBLC) — a bank instrument used as a payment guarantee in international trade.',
         '',
         '**What it does:**',
         '· Applicant obtains SBLC from issuing bank',
-        '· SBLC recorded on-chain as $SBLCT',
+        '· SBLC recorded on-chain as €SBLCT',
         '· Beneficiary gets guarantee of payment',
         '· If conditions met — payment released',
         '',
@@ -23,16 +23,16 @@
         '· Expiration date',
         '· Amendment clause',
         '',
-        '**Important:** $SBLCT is a **digital representation** of an SBLC. It is **not a bank-issued guarantee**.',
+        '**Important:** €SBLCT is a **digital representation** of an SBLC. It is **not a bank-issued guarantee**.',
         '',
         '📄 Contract: `SBLCTContractAddressHere`',
         '⛓ Chain: Solana (Token-2022, 1% transfer fee)'
       ].join('\n')
     },
     'buy': {
-      title: 'How to buy $SBLCT?',
+      title: 'How to buy €SBLCT?',
       answer: [
-        '**Buy $SBLCT on Solana:**',
+        '**Buy €SBLCT on Solana:**',
         '',
         '**1. Jupiter**',
         '→ https://jup.ag/tokens/SBLCTContractAddressHere',
@@ -49,7 +49,7 @@
     'contract': {
       title: 'Contract & Pool',
       answer: [
-        '**$SBLCT Contract (Solana)**',
+        '**€SBLCT Contract (Solana)**',
         '',
         '`SBLCTContractAddressHere`',
         '',
@@ -61,10 +61,10 @@
     'price': {
       title: 'Price & Target',
       answer: [
-        '**$SBLCT Price**',
+        '**€SBLCT Price**',
         '',
-        '· Launch price: **$0.01**',
-        '· Community target: **×100 → $1.00**',
+        '· Launch price: **€0.01**',
+        '· Community target: **×100 → €1.00**',
         '',
         '⚠️ The ×100 is a community-stated target, not a promise.'
       ].join('\n')
@@ -80,17 +80,13 @@
         '3. If applicant defaults — bank pays beneficiary',
         '4. If no default — SBLC expires unused',
         '',
-        '**$SBLCT tokenizes this flow:**',
+        '**€SBLCT tokenizes this flow:**',
         '· SBLC recorded on-chain',
         '· Conditions verified by smart contract',
         '· ISP98 compliant structure',
-        '· Bank of America Merrill Lynch + Microsoft pioneered blockchain SBLC in 2016 [citation:9][citation:21]',
+        '· Bank of America Merrill Lynch + Microsoft pioneered blockchain SBLC in 2016',
         '',
-        '**Real-world equivalents:**',
-        '· ISP98 (International Standby Practices)',
-        '· UCP 600 (for documentary credits)',
-        '',
-        '⚠️ $SBLCT is a digital representation, not a bank-issued guarantee.'
+        '⚠️ €SBLCT is a digital representation, not a bank-issued guarantee.'
       ].join('\n')
     },
     'ecosystem': {
@@ -99,20 +95,20 @@
         '**AviaTrust — aviation tokenization ecosystem on Solana.**',
         '',
         '**Financial layer:**',
-        '· **$ESCR** — Escrow (trust layer)',
-        '· **$DLCT** — Tokenized DLC (trade finance)',
-        '· **$SBLCT** — Standby LC Token (you are here)',
-        '· **$BRKR** — Broker Commission Protection',
+        '· **€ESCR** — Escrow (trust layer)',
+        '· **€DLCT** — Tokenized DLC (trade finance)',
+        '· **€SBLCT** — Standby LC Token (you are here)',
+        '· **€BRKR** — Broker Commission Protection',
         '',
         '**Aircraft layer (10 tokens):**',
-        '$B787 · €A350 · ¥C929 · €A220 · R$E195',
-        '$737MAX10 · $FAXX · $F22 · C$CRJ900 · ₽IL96',
+        '€B787 · €A350 · €C929 · €A220 · €E195',
+        '€737MAX10 · €FAXX · €F22 · €CRJ900 · €IL96',
         '',
         'Built on Solana for speed and low fees.'
       ].join('\n')
     },
     'risk': {
-      title: 'Is $SBLCT risky?',
+      title: 'Is €SBLCT risky?',
       answer: [
         '**Honest answer: YES.**',
         '',
@@ -121,7 +117,7 @@
         '· Liquidity risk',
         '· Regulatory uncertainty — SBLC is a bank instrument',
         '',
-        '**Important:** $SBLCT is a **digital representation** of an SBLC. It is **NOT a bank-issued guarantee**. Do not use $SBLCT as a substitute for regulated trade finance.',
+        '**Important:** €SBLCT is a **digital representation** of an SBLC. It is **NOT a bank-issued guarantee**.',
         '',
         '**What reduces risk:**',
         '· Mint Authority disabled',
@@ -133,7 +129,7 @@
   };
 
   var SUGGESTIONS = [
-    { key: 'what',      label: '🛡️ What is $SBLCT?' },
+    { key: 'what',      label: '🛡️ What is €SBLCT?' },
     { key: 'buy',       label: '🛒 How to buy?' },
     { key: 'contract',  label: '🔗 Contract' },
     { key: 'price',     label: '💰 Price & Target' },
@@ -158,7 +154,7 @@
       '    <img src="sblct_logo.png" alt="Avia" class="avia-avatar" onerror="this.style.display=\'none\'" />',
       '    <div>',
       '      <div class="avia-name">Avia</div>',
-      '      <div class="avia-status">AI assistant · $SBLCT</div>',
+      '      <div class="avia-status">AI assistant · €SBLCT</div>',
       '    </div>',
       '  </div>',
       '  <button class="avia-close" id="avia-close">×</button>',
@@ -177,7 +173,7 @@
     el('avia-btn').addEventListener('click', toggle);
     el('avia-close').addEventListener('click', toggle);
 
-    addMessage('agent', 'Hi! I am Avia — assistant for $SBLCT Standby LC Token. Pick a topic below.');
+    addMessage('agent', 'Hi! I am Avia — assistant for €SBLCT Standby LC Token. Pick a topic below.');
     renderSuggestions();
   }
 
