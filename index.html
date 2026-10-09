@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Standby Letter of Credit Token ($SBLCT) — Guarantee Layer of AviaTrust</title>
+<meta name="description" content="Standby Letter of Credit Token on Solana. Digital representation of SBLC for aviation lease deals. $0.01 → target ×100." />
+<link rel="icon" href="sblct_logo.png" />
+<link rel="stylesheet" href="ai-agent.css" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: radial-gradient(ellipse at top, #1F180F 0%, #0A0E27 50%, #060920 100%);
+  color: #E0E6FF; line-height: 1.6; overflow-x: hidden;
+  padding-top: 130px; padding-bottom: 60px;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+.orb { position: fixed; border-radius: 50%; pointer-events: none; filter: blur(80px); opacity: 0.4; z-index: 0; }
+.orb-1 { width: 400px; height: 400px; background: #FFA500; top: 10%; left: -100px; }
+.orb-2 { width: 350px; height: 350px; background: #FFC34D; bottom: 15%; right: -80px; }
+.orb-3 { width: 250px; height: 250px; background: #FFA500; top: 50%; left: 40%; opacity: 0.2; }
+
+.ticker { position: fixed; left: 0; width: 100%; z-index: 1000; background: rgba(10, 14, 39, 0.95); border-top: 1px solid #1E2350; border-bottom: 1px solid #1E2350; overflow: hidden; padding: 6px 0; backdrop-filter: blur(8px); }
+.ticker-top { top: 0; border-bottom: 1px solid rgba(255,165,0,0.4); }
+.ticker-bottom { bottom: 0; border-top: 1px solid rgba(255,165,0,0.4); }
+.ticker-track { display: flex; white-space: nowrap; animation: tickerScroll 45s linear infinite; width: max-content; }
+.ticker-track span { margin: 0 30px; font-size: 13px; color: #8A94C8; letter-spacing: 0.5px; flex-shrink: 0; }
+.ticker-track .highlight-ticker { color: #FFA500; font-weight: 600; }
+.ticker-track .contract-ticker { font-family: 'Courier New', monospace; color: #FFA500; background: rgba(255,165,0,0.08); padding: 2px 8px; border-radius: 4px; font-size: 11px; }
+@keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.ticker-bottom .ticker-track { animation-duration: 38s; }
+
+header { position: fixed; top: 36px; left: 0; width: 100%; background: rgba(10, 14, 39, 0.92); backdrop-filter: blur(12px); z-index: 900; border-bottom: 1px solid rgba(255,165,0,0.2); padding: 8px 0; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.logo { display: flex; align-items: center; gap: 8px; }
+.logo img { height: 40px; width: auto; border-radius: 50%; box-shadow: 0 0 20px rgba(255,165,0,0.5); }
+.logo-text { font-size: 20px; font-weight: 700; color: #fff; }
+.logo-badge { font-size: 9px; background: linear-gradient(135deg, #FFA500, #FFC34D); color: #0A0E27; padding: 2px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase; }
+.header-contract { font-size: 10px; color: #5A649A; background: rgba(26,30,65,0.5); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(255,165,0,0.2); display: inline-flex; align-items: center; gap: 6px; font-family: 'Courier New', monospace; }
+.header-contract .addr { color: #E0E6FF; }
+.header-contract .copy-btn { background: transparent; border: none; color: #5A649A; cursor: pointer; font-size: 11px; }
+.header-contract .copy-btn:hover { color: #FFA500; }
+.header-contract .solscan-link { color: #5A649A; text-decoration: none; font-size: 11px; }
+.header-contract .solscan-link:hover { color: #FFA500; }
+
+nav { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+nav a { color: #8A94C8; text-decoration: none; font-size: 12px; font-weight: 500; transition: 0.3s; }
+nav a:hover { color: #FFA500; }
+nav a.active { color: #FFA500; border-bottom: 2px solid #FFA500; }
+
+.btn-primary { background: linear-gradient(135deg, #FFA500 0%, #FFC34D 100%); color: #0A0E27; padding: 8px 20px; border-radius: 30px; font-weight: 700; text-decoration: none; transition: 0.3s; border: none; cursor: pointer; display: inline-block; font-size: 13px; box-shadow: 0 4px 20px rgba(255,165,0,0.4); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,165,0,0.7); }
+.btn-secondary { background: transparent; color: #FFA500; padding: 8px 20px; border-radius: 30px; font-weight: 600; text-decoration: none; border: 1px solid #FFA500; transition: 0.3s; display: inline-block; font-size: 13px; }
+.btn-secondary:hover { background: #FFA500; color: #0A0E27; box-shadow: 0 0 20px rgba(255,165,0,0.5); }
+.btn-outline { background: transparent; color: #8A94C8; padding: 8px 20px; border-radius: 30px; font-weight: 500; text-decoration: none; border: 1px solid #2A2F5A; transition: 0.3s; display: inline-block; font-size: 13px; }
+.btn-outline:hover { border-color: #FFA500; color: #fff; }
+.btn-glass { background: rgba(255,165,0, 0.08); backdrop-filter: blur(10px); color: #FFA500; padding: 8px 20px; border-radius: 30px; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,165,0,0.3); transition: 0.3s; display: inline-block; font-size: 13px; }
+.btn-glass:hover { background: rgba(255,165,0,0.2); box-shadow: 0 0 25px rgba(255,165,0,0.4); }
+
+.hero { padding: 20px 0 40px; position: relative; z-index: 1; min-height: 70vh; display: flex; align-items: center; background-image: url('sblct_hero_bg.png'); background-size: cover; background-position: center; background-attachment: fixed; }
+.hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(10,14,39,0.92) 0%, rgba(255,165,0,0.2) 100%); z-index: -1; }
+.hero-inner { display: flex; align-items: center; gap: 40px; position: relative; z-index: 1; }
+.hero-content { flex: 1; }
+.hero-tag { display: inline-block; background: rgba(255,165,0,0.15); color: #FFA500; padding: 4px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; margin-bottom: 12px; border: 1px solid rgba(255,165,0,0.3); }
+.hero h1 { font-size: 48px; font-weight: 800; line-height: 1.1; margin-bottom: 16px; background: linear-gradient(135deg, #fff 30%, #FFA500 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero h1 .highlight { color: #FFA500; -webkit-text-fill-color: #FFA500; }
+.hero .plane-icon { display: block; font-size: 32px; color: #FFA500; margin-bottom: 12px; text-shadow: 0 0 20px rgba(255,165,0,0.8); }
+.hero p { font-size: 17px; color: #E0E6FF; max-width: 520px; margin-bottom: 20px; }
+.hero-stats { display: flex; gap: 30px; margin-bottom: 20px; flex-wrap: wrap; }
+.stat-number { display: block; font-size: 24px; font-weight: 700; color: #fff; text-shadow: 0 0 15px rgba(255,165,0,0.5); }
+.stat-label { font-size: 12px; color: #8A94C8; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.contract-hero { margin-top: 16px; padding: 8px 16px; background: rgba(26,30,65,0.6); border-radius: 12px; border: 1px solid rgba(255,165,0,0.3); display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 12px; font-family: 'Courier New', monospace; }
+.contract-hero .label { color: #5A649A; font-family: 'Segoe UI', sans-serif; }
+.contract-hero .addr { color: #FFA500; }
+.contract-hero .copy-btn { background: rgba(255,165,0,0.08); border: 1px solid rgba(255,165,0,0.2); color: #FFA500; padding: 2px 12px; border-radius: 16px; cursor: pointer; font-size: 11px; transition: 0.2s; font-family: 'Segoe UI', sans-serif; }
+.contract-hero .copy-btn:hover { background: rgba(255,165,0,0.2); }
+.contract-hero .solscan-link { color: #5A649A; text-decoration: none; font-size: 11px; font-family: 'Segoe UI', sans-serif; }
+.contract-hero .solscan-link:hover { color: #fff; }
+
+.hero-visual { flex: 0 0 240px; text-align: center; }
+.hero-coin { width: 240px; height: 240px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 100px rgba(255,165,0,0.7), 0 0 150px rgba(255,165,0,0.4); animation: floatCoin 4s ease-in-out infinite; }
+@keyframes floatCoin { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(5deg); } }
+
+.video-section { padding: 60px 0; position: relative; z-index: 1; }
+.video-wrapper { max-width: 900px; margin: 0 auto; border-radius: 20px; overflow: hidden; border: 2px solid rgba(255,165,0,0.4); box-shadow: 0 20px 60px rgba(255,165,0,0.3); transition: 0.3s; }
+.video-wrapper:hover { box-shadow: 0 20px 80px rgba(255,165,0,0.6); transform: translateY(-4px); border-color: #FFA500; }
+.video-wrapper video { width: 100%; display: block; }
+
+.quick-buy { max-width: 700px; margin: 0 auto 30px; background: linear-gradient(160deg, rgba(26,30,65,0.6) 0%, rgba(31,24,15,0.6) 100%); border: 1px solid rgba(255,165,0,0.3); border-radius: 24px; padding: 28px 32px; backdrop-filter: blur(12px); text-align: center; box-shadow: 0 20px 60px rgba(255,165,0,0.15); }
+.quick-buy h2 { font-size: 28px; margin-bottom: 6px; }
+.quick-buy h2 .highlight { color: #FFA500; }
+.quick-buy .sub { color: #8A94C8; margin-bottom: 18px; font-size: 14px; }
+.buy-amount-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+.buy-amount-btn { background: rgba(26,30,65,0.6); border: 1px solid #1E2350; border-radius: 12px; padding: 12px 6px; color: #E0E6FF; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+.buy-amount-btn:hover, .buy-amount-btn.active { border-color: #FFA500; background: rgba(255,165,0,0.15); color: #FFA500; box-shadow: 0 0 20px rgba(255,165,0,0.3); }
+.buy-amount-btn small { display: block; font-size: 10px; font-weight: 400; color: #5A649A; margin-top: 2px; }
+.buy-amount-btn.active small { color: #FFA500; }
+.buy-custom-row { display: flex; gap: 8px; margin-bottom: 16px; }
+.buy-custom-row input { flex: 1; padding: 10px 14px; border-radius: 12px; border: 1px solid #1E2350; background: #060920; color: #fff; font-size: 15px; outline: none; min-width: 0; }
+.buy-custom-row input:focus { border-color: #FFA500; }
+.buy-custom-row input::placeholder { color: #3A406A; }
+.buy-total { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 10px; margin-bottom: 16px; font-size: 14px; color: #8A94C8; }
+.buy-total strong { color: #fff; font-size: 18px; }
+.buy-links-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; }
+.buy-links-grid a { background: rgba(255,165,0,0.08); border: 1px solid #1E2350; border-radius: 12px; padding: 10px 6px; color: #8A94C8; text-decoration: none; font-size: 11px; transition: 0.3s; text-align: center; }
+.buy-links-grid a:hover { border-color: #FFA500; color: #FFA500; background: rgba(255,165,0,0.05); }
+.buy-links-grid a .icon { display: block; font-size: 18px; margin-bottom: 2px; }
+
+section { padding: 60px 0; position: relative; z-index: 1; }
+.section-header { text-align: center; margin-bottom: 40px; }
+.section-tag { display: inline-block; background: rgba(255,165,0,0.12); color: #FFA500; padding: 4px 16px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border: 1px solid rgba(255,165,0,0.2); }
+.section-header h2 { font-size: 34px; font-weight: 700; margin: 8px 0; }
+.section-header h2 .highlight { color: #FFA500; }
+.section-header p { color: #8A94C8; max-width: 600px; margin: 0 auto; font-size: 15px; }
+
+.glass-card { background: linear-gradient(160deg, rgba(26, 30, 65, 0.5) 0%, rgba(31, 24, 15, 0.5) 100%); backdrop-filter: blur(12px); border: 1px solid rgba(255,165,0,0.15); border-radius: 20px; padding: 24px 24px; transition: 0.4s; }
+.glass-card:hover { border-color: rgba(255,165,0,0.4); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(255,165,0,0.15); }
+
+.about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.about-card { text-align: center; padding: 24px; }
+.about-icon { font-size: 36px; margin-bottom: 8px; filter: drop-shadow(0 0 15px rgba(255,165,0,0.6)); }
+.about-card h3 { font-size: 17px; margin-bottom: 6px; color: #fff; }
+.about-card p { font-size: 13px; color: #8A94C8; }
+
+.rwa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.rwa-card { background: linear-gradient(160deg, rgba(26,30,65,0.5), rgba(31,24,15,0.5)); border: 1px solid rgba(255,165,0,0.15); border-radius: 16px; padding: 22px 18px; text-align: center; transition: 0.3s; }
+.rwa-card:hover { border-color: #FFA500; transform: translateY(-4px); box-shadow: 0 15px 30px rgba(255,165,0,0.2); }
+.rwa-card .rwa-icon { font-size: 30px; margin-bottom: 6px; filter: drop-shadow(0 0 12px rgba(255,165,0,0.6)); }
+.rwa-card h4 { color: #fff; font-size: 15px; }
+.rwa-card p { color: #8A94C8; font-size: 12px; margin-top: 4px; }
+
+.image-block { max-width: 900px; margin: 30px auto; text-align: center; }
+.image-block img { max-width: 100%; border-radius: 20px; border: 1px solid rgba(255,165,0,0.2); box-shadow: 0 10px 60px rgba(255,165,0,0.2); }
+
+footer { background: linear-gradient(180deg, #060920 0%, #030510 100%); padding: 30px 0 16px; position: relative; z-index: 1; border-top: 1px solid rgba(255,165,0,0.2); margin-bottom: 40px; }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-brand { display: flex; align-items: center; gap: 8px; }
+.footer-brand img { height: 32px; width: auto; border-radius: 50%; box-shadow: 0 0 15px rgba(255,165,0,0.5); }
+.footer-brand .logo-text { font-size: 16px; }
+.footer-brand p { font-size: 11px; color: #5A649A; margin-top: 2px; }
+.footer-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.footer-links a { color: #8A94C8; text-decoration: none; font-size: 12px; }
+.footer-links a:hover { color: #FFA500; }
+.footer-social { display: flex; gap: 10px; }
+.footer-social a { color: #8A94C8; text-decoration: none; font-size: 16px; }
+.footer-social a:hover { color: #FFA500; }
+
+.footer-counter { text-align: center; padding: 12px 0; border-top: 1px solid rgba(255,165,0,0.15); margin-top: 12px; font-size: 13px; color: #8A94C8; font-family: 'Courier New', monospace; }
+.footer-counter .counter-visitors { color: #FFA500; font-weight: 600; }
+.footer-counter .counter-clients { color: #FFC34D; font-weight: 600; }
+.footer-counter .time { font-size: 10px; color: #3A406A; }
+
+.footer-contract { text-align: center; padding: 10px 0; border-top: 1px solid rgba(255,165,0,0.15); margin-top: 12px; font-size: 12px; color: #5A649A; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; font-family: 'Courier New', monospace; }
+.footer-contract .addr { color: #FFA500; }
+.footer-contract .copy-btn { background: transparent; border: none; color: #5A649A; cursor: pointer; font-size: 12px; font-family: 'Segoe UI', sans-serif; }
+.footer-contract .copy-btn:hover { color: #FFA500; }
+.footer-contract .solscan-link { color: #5A649A; text-decoration: none; font-size: 12px; font-family: 'Segoe UI', sans-serif; }
+.footer-contract .solscan-link:hover { color: #fff; }
+.footer-bottom { text-align: center; padding-top: 12px; border-top: 1px solid rgba(255,165,0,0.15); margin-top: 12px; font-size: 11px; color: #3A406A; }
+
+@media (max-width: 768px) {
+  body { padding-top: 180px; }
+  header { top: 34px; padding: 6px 0; }
+  .header-inner { flex-direction: column; align-items: stretch; }
+  .header-contract { font-size: 9px; padding: 2px 8px; justify-content: center; }
+  nav { justify-content: center; gap: 6px; }
+  nav a { font-size: 10px; }
+  .hero { padding: 10px 0 30px; background-attachment: scroll; }
+  .hero-inner { flex-direction: column; text-align: center; }
+  .hero h1 { font-size: 32px; }
+  .hero-stats { justify-content: center; gap: 14px; }
+  .hero-actions { justify-content: center; }
+  .contract-hero { justify-content: center; font-size: 10px; }
+  .hero-visual { flex: 0 0 160px; }
+  .hero-coin { width: 160px; height: 160px; }
+  .quick-buy { padding: 16px; }
+  .buy-amount-grid { grid-template-columns: repeat(2, 1fr); }
+  .buy-links-grid { grid-template-columns: 1fr 1fr; }
+  .buy-custom-row { flex-direction: column; }
+  section { padding: 30px 0; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-contract { font-size: 10px; flex-direction: column; gap: 4px; }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 26px; }
+  .hero-stats { gap: 8px; }
+  .stat-number { font-size: 16px; }
+  .buy-amount-grid { grid-template-columns: 1fr 1fr; }
+  .buy-links-grid { grid-template-columns: 1fr; }
+  .header-contract { display: none; }
+  .orb { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<div class="ticker ticker-top">
+  <div class="ticker-track">
+    <span>🛡️ <span class="highlight-ticker">Standby LC Token ($SBLCT)</span> — Guarantee Layer of AviaTrust • Solana</span>
+    <span>✦ Contract: <span class="contract-ticker">SBLCTContractAddressHere</span></span>
+    <span>✦ <span class="highlight-ticker">$0.01</span> → 100× to $1.00</span>
+    <span>✦ Token-2022 • 1% Transfer Fee</span>
+    <span>✦ ISP98 • Bank Guarantees • Aviation Leasing</span>
+    <span>✦ SWIFT • SEPA • CIPS • UPI • PIX</span>
+    <span>🛡️ <span class="highlight-ticker">Standby LC Token ($SBLCT)</span> — Guarantee Layer of AviaTrust • Solana</span>
+    <span>✦ Contract: <span class="contract-ticker">SBLCTContractAddressHere</span></span>
+    <span>✦ <span class="highlight-ticker">$0.01</span> → 100× to $1.00</span>
+    <span>✦ Token-2022 • 1% Transfer Fee</span>
+    <span>✦ ISP98 • Bank Guarantees • Aviation Leasing</span>
+    <span>✦ SWIFT • SEPA • CIPS • UPI • PIX</span>
+  </div>
+</div>
+
+<header>
+  <div class="container header-inner">
+    <div class="logo">
+      <img src="sblct_logo.png" alt="$SBLCT Logo" />
+      <span class="logo-text">SBLCT</span>
+      <span class="logo-badge">$SBLCT</span>
+    </div>
+    <div class="header-contract">
+      📜 <span class="addr">SBLCTContractAddressHere</span>
+      <button onclick="navigator.clipboard.writeText('SBLCTContractAddressHere')" class="copy-btn">📋</button>
+      <a href="https://solscan.io/token/SBLCTContractAddressHere" target="_blank" class="solscan-link">🔍</a>
+    </div>
+    <nav>
+      <a href="index.html" class="active">$SBLCT</a>
+      <a href="buy.html">Buy</a>
+      <a href="trade.html">Trade</a>
+      <a href="fintech2.html">Fintech</a>
+      <a href="ecosystem.html">Ecosystem</a>
+    </nav>
+    <a href="buy.html" class="btn-primary">Buy $SBLCT</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-content">
+      <div class="hero-tag">🛡️ AviaTrust Financial Layer</div>
+      <span class="plane-icon">🛡️</span>
+      <h1>Standby LC — <span class="highlight">$SBLCT</span> Guarantee Layer</h1>
+      <p>Digital representation of Standby Letters of Credit for aviation lease deals. On-chain guarantees, ISP98 structure, Solana speed.</p>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-number counter-visitors">2,030</span><span class="stat-label">Visitors</span></div>
+        <div class="stat"><span class="stat-number counter-clients">0</span><span class="stat-label">Clients</span></div>
+        <div class="stat"><span class="stat-number">$0.01</span><span class="stat-label">Price</span></div>
+      </div>
+      <div class="hero-actions">
+        <a href="buy.html" class="btn-primary">Buy $SBLCT</a>
+        <a href="https://jup.ag/tokens/SBLCTContractAddressHere" target="_blank" class="btn-outline">Jupiter</a>
+        <a href="https://solscan.io/token/SBLCTContractAddressHere" target="_blank" class="btn-glass">Solscan</a>
+      </div>
+      <div class="contract-hero">
+        <span class="label">📜 Contract:</span>
+        <span class="addr">SBLCTContractAddressHere</span>
+        <button onclick="navigator.clipboard.writeText('SBLCTContractAddressHere')" class="copy-btn">📋 Copy</button>
+        <a href="https://solscan.io/token/SBLCTContractAddressHere" target="_blank" class="solscan-link">🔍 Solscan</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="sblct_coin.png" alt="$SBLCT Coin" class="hero-coin" onerror="this.onerror=null;this.src='sblct_logo.png';" />
+    </div>
+  </div>
+</section>
+
+<section class="video-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Watch</span>
+      <h2>How <span class="highlight">$SBLCT</span> Works</h2>
+      <p>Standby guarantees, tokenized on Solana.</p>
+    </div>
+    <div class="video-wrapper">
+      <video controls autoplay muted loop playsinline poster="sblct_logo.png">
+        <source src="sblct_promo_video.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<section id="buy">
+  <div class="container">
+    <div class="quick-buy glass-card">
+      <h2>Buy <span class="highlight">$SBLCT</span></h2>
+      <p class="sub">Pay with card, SWIFT, SEPA, or crypto</p>
+      <div class="buy-amount-grid">
+        <button class="buy-amount-btn" data-usd="5">$5 <small>500 SBLCT</small></button>
+        <button class="buy-amount-btn" data-usd="10">$10 <small>1,000 SBLCT</small></button>
+        <button class="buy-amount-btn" data-usd="25">$25 <small>2,500 SBLCT</small></button>
+        <button class="buy-amount-btn active" data-usd="50">$50 <small>5,000 SBLCT</small></button>
+      </div>
+      <div class="buy-custom-row">
+        <input type="number" id="customAmount" placeholder="Enter amount in $" min="1" />
+        <button class="btn-primary" id="setCustomBtn" style="padding: 10px 18px;">Apply</button>
+      </div>
+      <div class="buy-total">
+        You get: <strong id="totalSBLCT">5,000</strong> <span style="color:#FFA500;">SBLCT</span>
+        &nbsp;·&nbsp; Price: <span id="displayPrice">$0.01</span>
+      </div>
+      <div class="buy-links-grid">
+        <a href="https://jup.ag/tokens/SBLCTContractAddressHere" target="_blank"><span class="icon">🔄</span> Jupiter</a>
+        <a href="https://opensea.io/token/solana/SBLCTContractAddressHere" target="_blank"><span class="icon">🖼️</span> OpenSea</a>
+        <a href="https://app.binance.com/uni-qr/web3-token-details?tokenCA=SBLCTContractAddressHere" target="_blank"><span class="icon">🟡</span> Binance</a>
+        <a href="buy.html" style="grid-column: span 4; background: rgba(255,165,0,0.12); border-color: #FFA500; color: #FFA500;"><span class="icon">💳</span> More Buy Options →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">About</span>
+      <h2>What is <span class="highlight">$SBLCT</span>?</h2>
+      <p>The guarantee layer of the AviaTrust financial ecosystem.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-card glass-card"><div class="about-icon">🛡️</div><h3>ISP98</h3><p>International Standby Practices structure.</p></div>
+      <div class="about-card glass-card"><div class="about-icon">🏦</div><h3>Bank Guarantee</h3><p>Digital representation of SBLC instrument.</p></div>
+      <div class="about-card glass-card"><div class="about-icon">⚡</div><h3>Solana Speed</h3><p>Guarantee recorded in seconds.</p></div>
+      <div class="about-card glass-card"><div class="about-icon">✈️</div><h3>Aviation Leasing</h3><p>Guarantee for lease payments.</p></div>
+    </div>
+    <div class="image-block">
+      <img src="sblct_chart.png" alt="$SBLCT Tokenomics Chart" />
+    </div>
+  </div>
+</section>
+
+<section id="fintech">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Guarantees • Aviation • Fintech</span>
+      <h2>Powerful <span class="highlight">Fintech</span></h2>
+    </div>
+    <div class="image-block">
+      <img src="sblct_fintech_diagram.png" alt="$SBLCT Fintech Diagram" />
+    </div>
+    <div class="rwa-grid">
+      <div class="rwa-card glass-card"><div class="rwa-icon">✈️</div><h4>Aircraft Lease Guarantees</h4><p>SBLC for lease payment obligations.</p></div>
+      <div class="rwa-card glass-card"><div class="rwa-icon">🔧</div><h4>Parts Supply Guarantees</h4><p>SBLC for long-term parts contracts.</p></div>
+      <div class="rwa-card glass-card"><div class="rwa-icon">🏦</div><h4>Bank Guarantee Tokenization</h4><p>Digital representation of bank SBLCs.</p></div>
+      <div class="rwa-card glass-card"><div class="rwa-icon">🛡️</div><h4>Default Protection</h4><p>Beneficiary protected if applicant defaults.</p></div>
+    </div>
+    <div style="text-align:center; margin-top:16px;">
+      <a href="fintech2.html" class="btn-secondary">Explore Fintech →</a>
+    </div>
+  </div>
+</section>
+
+<div class="ticker ticker-bottom">
+  <div class="ticker-track">
+    <span>🛡️ <span class="highlight-ticker">SBLCT = $0.01</span> • 100× to $1.00</span>
+    <span>✦ Contract: <span class="contract-ticker">SBLCTContractAddressHere</span></span>
+    <span>✦ Guarantee Layer of AviaTrust</span>
+    <span>✦ Solana — 65,000 TPS</span>
+    <span>✦ ISP98 • SWIFT MT 760 • Bank Guarantees</span>
+    <span>✦ 365 Days Liquidity Lock</span>
+    <span>🛡️ <span class="highlight-ticker">SBLCT = $0.01</span> • 100× to $1.00</span>
+    <span>✦ Contract: <span class="contract-ticker">SBLCTContractAddressHere</span></span>
+    <span>✦ Guarantee Layer of AviaTrust</span>
+    <span>✦ Solana — 65,000 TPS</span>
+    <span>✦ ISP98 • SWIFT MT 760 • Bank Guarantees</span>
+    <span>✦ 365 Days Liquidity Lock</span>
+  </div>
+</div>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img src="sblct_logo.png" alt="$SBLCT" />
+      <span class="logo-text">SBLCT</span>
+      <p>Standby LC Token ($SBLCT) — Guarantee Layer of AviaTrust</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">$SBLCT</a>
+      <a href="fintech1.html">Fintech</a>
+      <a href="ecosystem.html">Ecosystem</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://opensea.io/token/solana/SBLCTContractAddressHere" target="_blank">🖼️ OpenSea</a>
+      <a href="https://x.com/aviatrust" target="_blank">🐦 X</a>
+      <a href="https://t.me/aviatrust" target="_blank">📱 TG</a>
+    </div>
+  </div>
+
+  <div class="footer-counter">
+    🛡️ Visitors: <span class="counter-visitors">2,030</span>
+    &nbsp;·&nbsp;
+    🤝 Clients: <span class="counter-clients">0</span>
+    <br />
+    <span class="time counter-visitor-time">Updated: —</span>
+  </div>
+
+  <div class="footer-contract">
+    📜 Contract: <span class="addr">SBLCTContractAddressHere</span>
+    <button onclick="navigator.clipboard.writeText('SBLCTContractAddressHere')" class="copy-btn">📋 Copy</button>
+    <a href="https://solscan.io/token/SBLCTContractAddressHere" target="_blank" class="solscan-link">🔍 Solscan</a>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 AviaTrust. Built on Solana. | Guarantee Layer. 🛡️</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.ticker-track').forEach(track => {
+  const content = track.innerHTML;
+  track.innerHTML = content + content + content;
+});
+
+const price = 0.01;
+const priceEl = document.getElementById('displayPrice');
+const totalEl = document.getElementById('totalSBLCT');
+const customInput = document.getElementById('customAmount');
+const setCustomBtn = document.getElementById('setCustomBtn');
+
+setInterval(() => {
+  const change = (Math.random() - 0.5) * 0.0005;
+  const newPrice = Math.max(0.009, Math.min(0.011, price + change));
+  priceEl.textContent = '$' + newPrice.toFixed(4);
+}, 3000);
+
+const amountBtns = document.querySelectorAll('.buy-amount-btn');
+amountBtns.forEach(btn => {
+  btn.addEventListener('click', function() {
+    amountBtns.forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    updateTotal(parseFloat(this.dataset.usd));
+  });
+});
+
+setCustomBtn.addEventListener('click', function() {
+  const val = parseFloat(customInput.value);
+  if (val && val > 0) {
+    amountBtns.forEach(b => b.classList.remove('active'));
+    updateTotal(val);
+  } else { alert('Enter a valid amount'); }
+});
+
+customInput.addEventListener('keydown', e => { if (e.key === 'Enter') setCustomBtn.click(); });
+
+function updateTotal(usd) {
+  totalEl.textContent = Math.floor(usd / price).toLocaleString();
+}
+
+updateTotal(50);
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) {
+      const top = target.getBoundingClientRect().top + window.pageYOffset - 160;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+<script src="counter.js"></script>
+<script src="ai-agent.js"></script>
+
+</body>
+</html>
