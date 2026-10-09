@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Buy $SBLCT — Card, SWIFT, SEPA, Crypto</title>
+<link rel="icon" href="sblct_logo.png" />
+<link rel="stylesheet" href="ai-agent.css" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: radial-gradient(ellipse at top, #1F180F 0%, #0A0E27 50%, #060920 100%); color: #E0E6FF; line-height: 1.6; padding-top: 80px; padding-bottom: 60px; }
+.container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+.glass-card { background: linear-gradient(160deg, rgba(26,30,65,0.7), rgba(31,24,15,0.7)); backdrop-filter: blur(12px); border: 1px solid rgba(255,165,0,0.3); border-radius: 24px; padding: 40px; margin-bottom: 24px; box-shadow: 0 20px 60px rgba(255,165,0,0.15); }
+.glass-card h1 { font-size: 34px; margin-bottom: 8px; }
+.glass-card h1 .highlight { color: #FFA500; }
+.glass-card .sub { color: #8A94C8; margin-bottom: 24px; }
+.method-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.method-card { background: rgba(26,30,65,0.4); border: 1px solid rgba(255,165,0,0.15); border-radius: 16px; padding: 20px 16px; text-align: center; transition: 0.3s; text-decoration: none; color: #E0E6FF; }
+.method-card:hover { border-color: #FFA500; transform: translateY(-4px); box-shadow: 0 15px 30px rgba(255,165,0,0.2); }
+.method-card .icon { font-size: 32px; display: block; margin-bottom: 8px; filter: drop-shadow(0 0 12px rgba(255,165,0,0.6)); }
+.method-card .name { font-weight: 600; }
+.method-card .desc { font-size: 13px; color: #5A649A; }
+.contract-box { background: rgba(255,165,0,0.05); border: 1px solid rgba(255,165,0,0.2); border-radius: 12px; padding: 16px; margin: 20px 0; text-align: center; font-size: 13px; color: #8A94C8; font-family: 'Courier New', monospace; }
+.contract-box .addr { color: #FFA500; }
+.contract-box .copy-btn { background: transparent; border: none; color: #5A649A; cursor: pointer; font-size: 13px; }
+.contract-box .copy-btn:hover { color: #FFA500; }
+.contract-box .solscan-link { color: #5A649A; text-decoration: none; font-size: 13px; margin-left: 8px; }
+.contract-box .solscan-link:hover { color: #fff; }
+.back-link { display: inline-block; margin-top: 20px; color: #FFA500; text-decoration: none; font-weight: 500; }
+.logo-img { height: 70px; width: auto; margin-bottom: 20px; border-radius: 50%; box-shadow: 0 0 30px rgba(255,165,0,0.6); }
+.counter-box { text-align: center; padding: 16px; background: rgba(255,165,0,0.05); border-radius: 12px; margin: 20px 0; font-size: 14px; color: #8A94C8; font-family: 'Courier New', monospace; }
+.counter-box .counter-visitors { color: #FFA500; font-weight: 600; }
+.counter-box .counter-clients { color: #FFC34D; font-weight: 600; }
+@media (max-width: 700px) { .method-grid { grid-template-columns: 1fr 1fr; } .glass-card { padding: 24px; } }
+@media (max-width: 450px) { .method-grid { grid-template-columns: 1fr; } .contract-box { font-size: 11px; } }
+</style>
+</head>
+<body>
+<div class="container">
+<div class="glass-card">
+<img src="sblct_logo.png" alt="$SBLCT" class="logo-img" />
+<h1>Buy <span class="highlight">Standby LC Token ($SBLCT)</span></h1>
+<p class="sub">Choose your preferred payment method</p>
+
+<div class="method-grid">
+  <a href="https://opensea.io/token/solana/SBLCTContractAddressHere" target="_blank" class="method-card"><span class="icon">💳</span><span class="name">Card (Visa/MC)</span><span class="desc">via OpenSea</span></a>
+  <a href="https://jup.ag/tokens/SBLCTContractAddressHere" target="_blank" class="method-card"><span class="icon">🔄</span><span class="name">Jupiter</span><span class="desc">Best price</span></a>
+  <a href="https://app.binance.com/uni-qr/web3-token-details?tokenCA=SBLCTContractAddressHere" target="_blank" class="method-card"><span class="icon">🟡</span><span class="name">Binance Web3</span><span class="desc">Global</span></a>
+  <a href="https://www.binance.com/" target="_blank" class="method-card"><span class="icon">🏦</span><span class="name">SWIFT</span><span class="desc">International wire</span></a>
+  <a href="https://www.okx.com/" target="_blank" class="method-card"><span class="icon">🇪🇺</span><span class="name">SEPA</span><span class="desc">EU bank</span></a>
+  <a href="https://www.binance.com/en/convert" target="_blank" class="method-card"><span class="icon">💱</span><span class="name">POS / Convert</span><span class="desc">Fiat → SBLCT</span></a>
+  <a href="https://www.okx.com/" target="_blank" class="method-card"><span class="icon">🇨🇳</span><span class="name">CIPS</span><span class="desc">China cross-border</span></a>
+  <a href="https://www.kraken.com/" target="_blank" class="method-card"><span class="icon">🇺🇸</span><span class="name">Fedwire / CHIPS</span><span class="desc">USD wire</span></a>
+  <a href="https://www.binance.com/" target="_blank" class="method-card"><span class="icon">🌍</span><span class="name">BUNA / UPI / PIX</span><span class="desc">Global rails</span></a>
+</div>
+
+<div class="counter-box">
+  🛡️ Visitors: <span class="counter-visitors">2,030</span>
+  &nbsp;·&nbsp;
+  🤝 Clients: <span class="counter-clients">0</span>
+</div>
+
+<div class="contract-box">
+  📜 Contract: <span class="addr">SBLCTContractAddressHere</span>
+  <button onclick="navigator.clipboard.writeText('SBLCTContractAddressHere')" class="copy-btn">📋 Copy</button>
+  <a href="https://solscan.io/token/SBLCTContractAddressHere" target="_blank" class="solscan-link">🔍 Solscan</a>
+</div>
+
+<a href="index.html" class="back-link">← Back to $SBLCT Home</a>
+</div>
+</div>
+<script src="counter.js"></script>
+<script src="ai-agent.js"></script>
+</body>
+</html>
