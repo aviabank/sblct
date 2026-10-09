@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>$SBLCT — AviaTrust Ecosystem</title>
+<link rel="icon" href="sblct_logo.png" />
+<link rel="stylesheet" href="ai-agent.css" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: radial-gradient(ellipse at top, #1F180F 0%, #0A0E27 50%, #060920 100%); color: #E0E6FF; line-height: 1.6; padding-top: 80px; padding-bottom: 60px; }
+.container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+.glass-card { background: linear-gradient(160deg, rgba(26,30,65,0.7), rgba(31,24,15,0.7)); backdrop-filter: blur(12px); border: 1px solid rgba(255,165,0,0.3); border-radius: 24px; padding: 40px; margin-bottom: 24px; box-shadow: 0 20px 60px rgba(255,165,0,0.15); }
+.glass-card h1 { font-size: 34px; margin-bottom: 8px; }
+.glass-card h1 .highlight { color: #FFA500; }
+.glass-card .sub { color: #8A94C8; margin-bottom: 24px; }
+.image-block { max-width: 100%; margin: 30px auto; text-align: center; }
+.image-block img { max-width: 100%; border-radius: 20px; border: 1px solid rgba(255,165,0,0.2); box-shadow: 0 20px 60px rgba(255,165,0,0.2); }
+.section-subtitle { text-align: center; margin: 30px 0 16px; color: #FFA500; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.token-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 20px 0; }
+.token-card { background: rgba(26,30,65,0.4); border: 2px solid rgba(255,165,0,0.2); border-radius: 16px; padding: 22px 16px; text-align: center; transition: 0.3s; }
+.token-card:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(255,165,0,0.2); }
+.token-card .symbol { font-size: 26px; font-weight: 700; }
+.token-card .price { font-size: 16px; color: #fff; margin-top: 4px; }
+.token-card .desc { font-size: 12px; color: #5A649A; margin-top: 4px; }
+.token-card .contract { font-size: 9px; font-family: 'Courier New', monospace; color: #FFA500; margin-top: 8px; word-break: break-all; }
+.token-card.escr { border-color: rgba(74,140,255,0.4); }
+.token-card.dlct { border-color: rgba(46,204,64,0.4); }
+.token-card.sblct { border-color: rgba(255,165,0,0.7); box-shadow: 0 0 30px rgba(255,165,0,0.3); }
+.token-card.brkr { border-color: rgba(181,123,255,0.4); }
+.aircraft-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+.aircraft-card { background: rgba(15,20,64,0.4); border: 1px solid rgba(255,165,0,0.1); border-radius: 12px; padding: 14px 10px; text-align: center; }
+.aircraft-card .symbol { font-size: 18px; font-weight: 700; }
+.aircraft-card .desc { font-size: 10px; color: #5A649A; margin-top: 2px; }
+.contract-box { background: rgba(255,165,0,0.05); border: 1px solid rgba(255,165,0,0.2); border-radius: 12px; padding: 16px; margin: 20px 0; text-align: center; font-size: 13px; color: #8A94C8; font-family: 'Courier New', monospace; }
+.contract-box .addr { color: #FFA500; }
+.contract-box .copy-btn { background: transparent; border: none; color: #5A649A; cursor: pointer; font-size: 13px; }
+.contract-box .copy-btn:hover { color: #FFA500; }
+.contract-box .solscan-link { color: #5A649A; text-decoration: none; font-size: 13px; margin-left: 8px; }
+.contract-box .solscan-link:hover { color: #fff; }
+.counter-box { text-align: center; padding: 16px; background: rgba(255,165,0,0.05); border-radius: 12px; margin: 20px 0; font-size: 14px; color: #8A94C8; font-family: 'Courier New', monospace; }
+.counter-box .counter-visitors { color: #FFA500; font-weight: 600; }
+.counter-box .counter-clients { color: #FFC34D; font-weight: 600; }
+.back-link { display: inline-block; margin-top: 20px; color: #FFA500; text-decoration: none; font-weight: 500; }
+.logo-img { height: 70px; width: auto; margin-bottom: 20px; border-radius: 50%; box-shadow: 0 0 30px rgba(255,165,0,0.6); }
+@media (max-width: 800px) { .token-row { grid-template-columns: 1fr; } .aircraft-row { grid-template-columns: 1fr 1fr; } .glass-card { padding: 24px; } }
+</style>
+</head>
+<body>
+<div class="container">
+<div class="glass-card">
+<img src="sblct_logo.png" alt="$SBLCT" class="logo-img" />
+<h1>AviaTrust <span class="highlight">Ecosystem</span></h1>
+<p class="sub">Aircraft tokens + financial layer on Solana.</p>
+
+<div class="image-block">
+  <img src="sblct_ecosystem_map.png" alt="AviaTrust Ecosystem" />
+</div>
+
+<div class="section-subtitle">🛡️ Financial Layer</div>
+<div class="token-row">
+  <div class="token-card escr"><div class="symbol">$ESCR</div><div class="price">$0.01</div><div class="desc">Escrow · Trust Layer</div><div class="contract">DEivmNyf9p9wNSPqMNRuxZsN9VTpZL1fRBypjEt8PmLs</div></div>
+  <div class="token-card dlct"><div class="symbol">$DLCT</div><div class="price">$0.01</div><div class="desc">Tokenized DLC · Trade Finance</div><div class="contract">AG6J7LmE5TaDyf1Nb41GC7VrCfsNaRbPjPvuocmk9Y65</div></div>
+  <div class="token-card sblct"><div class="symbol">$SBLCT</div><div class="price">$0.01</div><div class="desc">Standby LC · Guarantee Layer</div><div class="contract">SBLCTContractAddressHere</div></div>
+  <div class="token-card brkr"><div class="symbol">$BRKR</div><div class="price">$0.01</div><div class="desc">Broker Commission</div><div class="contract">BRKRContractAddressHere</div></div>
+</div>
+
+<div class="section-subtitle">✈️ Aircraft Layer</div>
+<div class="aircraft-row">
+  <div class="aircraft-card"><div class="symbol">$B787</div><div class="desc">Proven</div></div>
+  <div class="aircraft-card"><div class="symbol">€A350</div><div class="desc">Innovation</div></div>
+  <div class="aircraft-card"><div class="symbol">¥C929</div><div class="desc">Horizon</div></div>
+  <div class="aircraft-card"><div class="symbol">€A220</div><div class="desc">New Mass</div></div>
+  <div class="aircraft-card"><div class="symbol">R$E195</div><div class="desc">Efficiency</div></div>
+  <div class="aircraft-card"><div class="symbol">₽IL96</div><div class="desc">Frozen</div></div>
+</div>
+
+<div class="counter-box">
+  🛡️ Visitors: <span class="counter-visitors">2,030</span>
+  &nbsp;·&nbsp;
+  🤝 Clients: <span class="counter-clients">0</span>
+</div>
+
+<div class="contract-box">
+  📜 Contract: <span class="addr">SBLCTContractAddressHere</span>
+  <button onclick="navigator.clipboard.writeText('SBLCTContractAddressHere')" class="copy-btn">📋 Copy</button>
+  <a href="https://solscan.io/token/SBLCTContractAddressHere" target="_blank" class="solscan-link">🔍 Solscan</a>
+</div>
+
+<a href="index.html" class="back-link">← Back to $SBLCT Home</a>
+</div>
+</div>
+<script src="counter.js"></script>
+<script src="ai-agent.js"></script>
+</body>
+</html>
