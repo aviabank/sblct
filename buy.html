@@ -3,73 +3,209 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Buy €SBLCT — Card, SWIFT, SEPA, Crypto</title>
+<title>Buy €SBLCT — Standby LC Token</title>
 <link rel="icon" href="sblct_logo.png" />
 <link rel="stylesheet" href="ai-agent.css" />
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Segoe UI', system-ui, sans-serif; background: radial-gradient(ellipse at top, #1F180F 0%, #0A0E27 50%, #060920 100%); color: #E0E6FF; line-height: 1.6; padding-top: 80px; padding-bottom: 60px; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: radial-gradient(ellipse at top, #1F180F 0%, #0A0E27 50%, #060920 100%); color: #E0E6FF; line-height: 1.6; padding: 40px 0 80px; }
 .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-.glass-card { background: linear-gradient(160deg, rgba(26,30,65,0.7), rgba(31,24,15,0.7)); backdrop-filter: blur(12px); border: 1px solid rgba(255,165,0,0.3); border-radius: 24px; padding: 40px; margin-bottom: 24px; box-shadow: 0 20px 60px rgba(255,165,0,0.15); }
-.glass-card h1 { font-size: 34px; margin-bottom: 8px; }
-.glass-card h1 .highlight { color: #FFA500; }
-.glass-card .sub { color: #8A94C8; margin-bottom: 24px; }
-.method-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
-.method-card { background: rgba(26,30,65,0.4); border: 1px solid rgba(255,165,0,0.15); border-radius: 16px; padding: 20px 16px; text-align: center; transition: 0.3s; text-decoration: none; color: #E0E6FF; }
-.method-card:hover { border-color: #FFA500; transform: translateY(-4px); box-shadow: 0 15px 30px rgba(255,165,0,0.2); }
-.method-card .icon { font-size: 32px; display: block; margin-bottom: 8px; filter: drop-shadow(0 0 12px rgba(255,165,0,0.6)); }
-.method-card .name { font-weight: 600; }
-.method-card .desc { font-size: 13px; color: #5A649A; }
-.contract-box { background: rgba(255,165,0,0.05); border: 1px solid rgba(255,165,0,0.2); border-radius: 12px; padding: 16px; margin: 20px 0; text-align: center; font-size: 13px; color: #8A94C8; font-family: 'Courier New', monospace; }
-.contract-box .addr { color: #FFA500; }
-.contract-box .copy-btn { background: transparent; border: none; color: #5A649A; cursor: pointer; font-size: 13px; }
-.contract-box .copy-btn:hover { color: #FFA500; }
-.contract-box .solscan-link { color: #5A649A; text-decoration: none; font-size: 13px; margin-left: 8px; }
-.contract-box .solscan-link:hover { color: #fff; }
-.back-link { display: inline-block; margin-top: 20px; color: #FFA500; text-decoration: none; font-weight: 500; }
-.logo-img { height: 70px; width: auto; margin-bottom: 20px; border-radius: 50%; box-shadow: 0 0 30px rgba(255,165,0,0.6); }
-.counter-box { text-align: center; padding: 16px; background: rgba(255,165,0,0.05); border-radius: 12px; margin: 20px 0; font-size: 14px; color: #8A94C8; font-family: 'Courier New', monospace; }
-.counter-box .counter-visitors { color: #FFA500; font-weight: 600; }
-.counter-box .counter-clients { color: #FFC34D; font-weight: 600; }
-@media (max-width: 700px) { .method-grid { grid-template-columns: 1fr 1fr; } .glass-card { padding: 24px; } }
-@media (max-width: 450px) { .method-grid { grid-template-columns: 1fr; } .contract-box { font-size: 11px; } }
+.header-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; flex-wrap: wrap; gap: 12px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; }
+.logo img { height: 40px; width: auto; border-radius: 50%; box-shadow: 0 0 20px rgba(255,165,0,0.5); }
+.logo span { font-size: 20px; font-weight: 700; }
+.back-btn { color: #8A94C8; text-decoration: none; font-size: 13px; padding: 8px 16px; border: 1px solid #2A2F5A; border-radius: 20px; transition: 0.3s; }
+.back-btn:hover { border-color: #FFA500; color: #FFA500; }
+
+h1 { font-size: 32px; margin-bottom: 8px; }
+h1 .highlight { color: #FFA500; }
+.sub { color: #8A94C8; margin-bottom: 30px; }
+
+.buy-card { background: linear-gradient(160deg, rgba(26,30,65,0.7), rgba(31,24,15,0.7)); border: 2px solid rgba(255,165,0,0.3); border-radius: 24px; padding: 32px; margin-bottom: 24px; box-shadow: 0 20px 60px rgba(255,165,0,0.15); }
+
+.methods { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.method { background: rgba(6,9,32,0.6); border: 2px solid #1E2350; border-radius: 16px; padding: 18px 14px; text-align: center; cursor: pointer; transition: 0.3s; }
+.method:hover, .method.active { border-color: #FFA500; background: rgba(255,165,0,0.08); box-shadow: 0 0 20px rgba(255,165,0,0.25); }
+.method .icon { font-size: 28px; display: block; margin-bottom: 8px; filter: drop-shadow(0 0 12px rgba(255,165,0,0.5)); }
+.method .name { color: #fff; font-size: 14px; font-weight: 600; }
+.method .sub { color: #5A649A; font-size: 11px; margin-top: 4px; }
+
+.amount-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+.amount-btn { background: rgba(26,30,65,0.6); border: 1px solid #1E2350; border-radius: 12px; padding: 14px 6px; color: #E0E6FF; font-size: 15px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+.amount-btn:hover, .amount-btn.active { border-color: #FFA500; background: rgba(255,165,0,0.15); color: #FFA500; box-shadow: 0 0 20px rgba(255,165,0,0.3); }
+.amount-btn small { display: block; font-size: 10px; font-weight: 400; color: #5A649A; margin-top: 2px; }
+.amount-btn.active small { color: #FFA500; }
+
+.custom-row { display: flex; gap: 8px; margin-bottom: 20px; }
+.custom-row input { flex: 1; padding: 14px 18px; border-radius: 12px; border: 1px solid #1E2350; background: #060920; color: #fff; font-size: 15px; outline: none; }
+.custom-row input:focus { border-color: #FFA500; box-shadow: 0 0 15px rgba(255,165,0,0.2); }
+.custom-row input::placeholder { color: #3A406A; }
+.custom-row button { padding: 14px 24px; border-radius: 12px; border: none; background: linear-gradient(135deg, #FFA500, #FFC34D); color: #fff; font-weight: 700; cursor: pointer; font-size: 14px; box-shadow: 0 4px 15px rgba(255,165,0,0.4); transition: 0.3s; }
+.custom-row button:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,165,0,0.7); }
+
+.total-box { background: rgba(0,0,0,0.3); border-radius: 16px; padding: 20px; margin-bottom: 20px; text-align: center; }
+.total-box .label { font-size: 13px; color: #8A94C8; margin-bottom: 6px; }
+.total-box .value { font-size: 32px; font-weight: 800; color: #FFA500; text-shadow: 0 0 20px rgba(255,165,0,0.5); }
+.total-box .value small { font-size: 16px; color: #FFC34D; }
+.total-box .price-note { font-size: 12px; color: #5A649A; margin-top: 6px; }
+
+.buy-cta { width: 100%; padding: 18px 30px; border-radius: 16px; border: none; background: linear-gradient(135deg, #FFA500, #FFC34D); color: #fff; font-size: 17px; font-weight: 800; cursor: pointer; box-shadow: 0 8px 30px rgba(255,165,0,0.5); transition: 0.3s; letter-spacing: 0.5px; }
+.buy-cta:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(255,165,0,0.8); }
+
+.exchange-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 20px; }
+.exchange-links a { display: block; text-align: center; padding: 14px 10px; border-radius: 12px; background: rgba(255,165,0,0.08); border: 1px solid rgba(255,165,0,0.2); color: #FFA500; text-decoration: none; font-size: 13px; font-weight: 600; transition: 0.3s; }
+.exchange-links a:hover { background: rgba(255,165,0,0.2); border-color: #FFA500; transform: translateY(-2px); }
+.exchange-links a .icon { display: block; font-size: 22px; margin-bottom: 4px; }
+
+.info-card { background: rgba(26,30,65,0.5); border: 1px solid rgba(255,165,0,0.2); border-radius: 16px; padding: 20px; margin-bottom: 16px; }
+.info-card h3 { color: #FFA500; font-size: 15px; margin-bottom: 10px; }
+.info-card p { color: #8A94C8; font-size: 13px; margin-bottom: 6px; }
+.info-card code { background: rgba(255,165,0,0.1); color: #FFC34D; padding: 2px 8px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 11px; word-break: break-all; }
+
+.back-link { display: inline-block; margin-top: 24px; color: #FFA500; text-decoration: none; font-weight: 500; }
+.back-link:hover { text-decoration: underline; }
+
+@media (max-width: 600px) {
+  .amount-grid { grid-template-columns: 1fr 1fr; }
+  .custom-row { flex-direction: column; }
+  .buy-card { padding: 20px; }
+}
 </style>
 </head>
 <body>
 <div class="container">
-<div class="glass-card">
-<img src="sblct_logo.png" alt="€SBLCT" class="logo-img" />
-<h1>Buy <span class="highlight">Standby LC Token (€SBLCT)</span></h1>
-<p class="sub">Choose your preferred payment method</p>
 
-<div class="method-grid">
-  <a href="https://opensea.io/token/solana/SBLCTContractAddressHere" target="_blank" class="method-card"><span class="icon">💳</span><span class="name">Card (Visa/MC)</span><span class="desc">via OpenSea</span></a>
-  <a href="https://jup.ag/tokens/SBLCTContractAddressHere" target="_blank" class="method-card"><span class="icon">🔄</span><span class="name">Jupiter</span><span class="desc">Best price</span></a>
-  <a href="https://app.binance.com/uni-qr/web3-token-details?tokenCA=SBLCTContractAddressHere" target="_blank" class="method-card"><span class="icon">🟡</span><span class="name">Binance Web3</span><span class="desc">Global</span></a>
-  <a href="https://www.binance.com/" target="_blank" class="method-card"><span class="icon">🏦</span><span class="name">SWIFT</span><span class="desc">International wire</span></a>
-  <a href="https://www.okx.com/" target="_blank" class="method-card"><span class="icon">🇪🇺</span><span class="name">SEPA</span><span class="desc">EU bank</span></a>
-  <a href="https://www.binance.com/en/convert" target="_blank" class="method-card"><span class="icon">💱</span><span class="name">POS / Convert</span><span class="desc">Fiat → SBLCT</span></a>
-  <a href="https://www.okx.com/" target="_blank" class="method-card"><span class="icon">🇨🇳</span><span class="name">CIPS</span><span class="desc">China cross-border</span></a>
-  <a href="https://www.kraken.com/" target="_blank" class="method-card"><span class="icon">🇺🇸</span><span class="name">Fedwire / CHIPS</span><span class="desc">USD wire</span></a>
-  <a href="https://www.binance.com/" target="_blank" class="method-card"><span class="icon">🌍</span><span class="name">BUNA / UPI / PIX</span><span class="desc">Global rails</span></a>
+  <div class="header-bar">
+    <a href="index.html" class="logo">
+      <img src="sblct_logo.png" alt="€SBLCT" />
+      <span>SBLCT</span>
+    </a>
+    <a href="index.html" class="back-btn">← Back to Home</a>
+  </div>
+
+  <h1>Buy <span class="highlight">€SBLCT</span></h1>
+  <p class="sub">Standby LC Token — Guarantee Layer of AviaTrust. Pay with card, SWIFT, SEPA, or crypto.</p>
+
+  <div class="buy-card">
+
+    <div class="methods">
+      <div class="method active" data-method="card">
+        <span class="icon">💳</span>
+        <div class="name">Card</div>
+        <div class="sub">Visa / Mastercard</div>
+      </div>
+      <div class="method" data-method="swift">
+        <span class="icon">🏦</span>
+        <div class="name">SWIFT</div>
+        <div class="sub">Wire transfer</div>
+      </div>
+      <div class="method" data-method="sepa">
+        <span class="icon">🇪🇺</span>
+        <div class="name">SEPA</div>
+        <div class="sub">EUR transfer</div>
+      </div>
+      <div class="method" data-method="crypto">
+        <span class="icon">🪙</span>
+        <div class="name">Crypto</div>
+        <div class="sub">SOL / USDC</div>
+      </div>
+    </div>
+
+    <div class="amount-grid">
+      <button class="amount-btn" data-usd="10">€10 <small>1,000 SBLCT</small></button>
+      <button class="amount-btn" data-usd="25">€25 <small>2,500 SBLCT</small></button>
+      <button class="amount-btn active" data-usd="50">€50 <small>5,000 SBLCT</small></button>
+      <button class="amount-btn" data-usd="100">€100 <small>10,000 SBLCT</small></button>
+    </div>
+
+    <div class="custom-row">
+      <input type="number" id="customAmount" placeholder="Or enter custom amount in €" min="1" />
+      <button id="applyCustom">Apply</button>
+    </div>
+
+    <div class="total-box">
+      <div class="label">You will receive</div>
+      <div class="value" id="totalSBLCT">5,000 <small>SBLCT</small></div>
+      <div class="price-note">Price: €0.01 per SBLCT · Network: Solana</div>
+    </div>
+
+    <button class="buy-cta" id="buyBtn">🛡️ Buy €SBLCT Now</button>
+
+    <div class="exchange-links">
+      <a href="https://jup.ag/tokens/58UQGvysLh5GZHPX8XEz1xc8tModHYCeSqeu5e49uZoA" target="_blank">
+        <span class="icon">🔄</span> Jupiter
+      </a>
+      <a href="https://opensea.io/token/solana/58UQGvysLh5GZHPX8XEz1xc8tModHYCeSqeu5e49uZoA" target="_blank">
+        <span class="icon">🖼️</span> OpenSea
+      </a>
+      <a href="https://www.geckoterminal.com/solana/pools/58UQGvysLh5GZHPX8XEz1xc8tModHYCeSqeu5e49uZoA" target="_blank">
+        <span class="icon">📊</span> GeckoTerminal
+      </a>
+      <a href="https://solscan.io/token/58UQGvysLh5GZHPX8XEz1xc8tModHYCeSqeu5e49uZoA" target="_blank">
+        <span class="icon">🔍</span> Solscan
+      </a>
+    </div>
+
+  </div>
+
+  <div class="info-card">
+    <h3>📜 Contract Address</h3>
+    <p><code>58UQGvysLh5GZHPX8XEz1xc8tModHYCeSqeu5e49uZoA</code></p>
+    <p style="margin-top:8px;">Always verify the contract before buying. Only interact with the official AviaTrust links on this page.</p>
+  </div>
+
+  <div class="info-card">
+    <h3>⚠️ Important</h3>
+    <p>€SBLCT is a <strong>digital representation</strong> of a Standby Letter of Credit. It is <strong>NOT a bank-issued guarantee</strong>.</p>
+    <p>Not financial advice. Only invest what you can afford to lose.</p>
+  </div>
+
+  <a href="index.html" class="back-link">← Back to €SBLCT Home</a>
 </div>
 
-<div class="counter-box">
-  🛡️ Visitors: <span class="counter-visitors">2,030</span>
-  &nbsp;·&nbsp;
-  🤝 Clients: <span class="counter-clients">0</span>
-</div>
+<script>
+const price = 0.01;
+const totalEl = document.getElementById('totalSBLCT');
+const customInput = document.getElementById('customAmount');
+const applyBtn = document.getElementById('applyCustom');
 
-<div class="contract-box">
-  📜 Contract: <span class="addr">SBLCTContractAddressHere</span>
-  <button onclick="navigator.clipboard.writeText('SBLCTContractAddressHere')" class="copy-btn">📋 Copy</button>
-  <a href="https://solscan.io/token/SBLCTContractAddressHere" target="_blank" class="solscan-link">🔍 Solscan</a>
-</div>
+document.querySelectorAll('.method').forEach(m => {
+  m.addEventListener('click', function() {
+    document.querySelectorAll('.method').forEach(x => x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
 
-<a href="index.html" class="back-link">← Back to €SBLCT Home</a>
-</div>
-</div>
+function updateTotal(usd) {
+  const amount = Math.floor(usd / price);
+  totalEl.innerHTML = amount.toLocaleString() + ' <small>SBLCT</small>';
+}
+
+document.querySelectorAll('.amount-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    updateTotal(parseFloat(this.dataset.usd));
+  });
+});
+
+applyBtn.addEventListener('click', function() {
+  const val = parseFloat(customInput.value);
+  if (val && val > 0) {
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+    updateTotal(val);
+  } else { alert('Enter a valid amount'); }
+});
+
+customInput.addEventListener('keydown', e => { if (e.key === 'Enter') applyBtn.click(); });
+
+document.getElementById('buyBtn').addEventListener('click', function() {
+  window.open('https://jup.ag/tokens/58UQGvysLh5GZHPX8XEz1xc8tModHYCeSqeu5e49uZoA', '_blank');
+});
+</script>
+
 <script src="counter.js"></script>
 <script src="ai-agent.js"></script>
+
 </body>
 </html>
