@@ -1,8 +1,12 @@
-/* Avia — Scripted AI Bot for €SBLCT Standby Letter of Credit Token */
+/* Avia — Scripted AI Bot for €SBLCT Standby LC Token */
 (function () {
   'use strict';
   var state = { isOpen: false };
   function el(id) { return document.getElementById(id); }
+
+  var CONTRACT = '58UQGvysLh5GZHPX8XEz1xc8tModHYCeSqeu5e49uZoA';
+  var POOL = '58UQGvysLh5GZHPX8XEz1xc8tModHYCeSqeu5e49uZoA';
+  var AUDT_CONTRACT = '4EqVmfTc2ftfdcXCbR95UEsoMdab3WstSj5MEPVW2kqb';
 
   var KB = {
     'what': {
@@ -10,7 +14,7 @@
       answer: [
         '**€SBLCT (Standby Letter of Credit Token)** — the guarantee layer of AviaTrust on Solana.',
         '',
-        '€SBLCT represents a **Standby Letter of Credit** (SBLC) — a bank instrument used as a payment guarantee in international trade.',
+        '€SBLCT represents a **Standby Letter of Credit** (SBLC) — a bank instrument used as payment guarantee in international trade.',
         '',
         '**What it does:**',
         '· Applicant obtains SBLC from issuing bank',
@@ -25,7 +29,7 @@
         '',
         '**Important:** €SBLCT is a **digital representation** of an SBLC. It is **not a bank-issued guarantee**.',
         '',
-        '📄 Contract: `SBLCTContractAddressHere`',
+        '📄 Contract: `' + CONTRACT + '`',
         '⛓ Chain: Solana (Token-2022, 1% transfer fee)'
       ].join('\n')
     },
@@ -35,13 +39,13 @@
         '**Buy €SBLCT on Solana:**',
         '',
         '**1. Jupiter**',
-        '→ https://jup.ag/tokens/SBLCTContractAddressHere',
+        '→ https://jup.ag/tokens/' + CONTRACT,
         '',
         '**2. OpenSea**',
-        '→ https://opensea.io/token/solana/SBLCTContractAddressHere',
+        '→ https://opensea.io/token/solana/' + CONTRACT,
         '',
-        '**3. Binance Web3**',
-        '→ https://app.binance.com/uni-qr/web3-token-details?tokenCA=SBLCTContractAddressHere',
+        '**3. GeckoTerminal**',
+        '→ https://www.geckoterminal.com/solana/pools/' + POOL,
         '',
         '💡 Recommend Jupiter for lowest slippage.'
       ].join('\n')
@@ -51,11 +55,14 @@
       answer: [
         '**€SBLCT Contract (Solana)**',
         '',
-        '`SBLCTContractAddressHere`',
+        '`' + CONTRACT + '`',
         '',
-        '⚠️ Always verify contract before buying.',
+        '**Meteora Pool**',
+        '`' + POOL + '`',
         '',
-        '**Verify on Solscan once live.**'
+        '**Verify on:**',
+        '· Solscan: https://solscan.io/token/' + CONTRACT,
+        '· GeckoTerminal: https://www.geckoterminal.com/solana/pools/' + POOL
       ].join('\n')
     },
     'price': {
@@ -65,6 +72,10 @@
         '',
         '· Launch price: **€0.01**',
         '· Community target: **×100 → €1.00**',
+        '',
+        '**Live price:**',
+        '· GeckoTerminal: https://www.geckoterminal.com/solana/pools/' + POOL,
+        '· Jupiter: https://jup.ag/tokens/' + CONTRACT,
         '',
         '⚠️ The ×100 is a community-stated target, not a promise.'
       ].join('\n')
@@ -84,7 +95,6 @@
         '· SBLC recorded on-chain',
         '· Conditions verified by smart contract',
         '· ISP98 compliant structure',
-        '· Bank of America Merrill Lynch + Microsoft pioneered blockchain SBLC in 2016',
         '',
         '⚠️ €SBLCT is a digital representation, not a bank-issued guarantee.'
       ].join('\n')
@@ -94,17 +104,19 @@
       answer: [
         '**AviaTrust — aviation tokenization ecosystem on Solana.**',
         '',
+        '**Audit layer:**',
+        '· **€AUDT** — Audit Token (working unit)',
+        '· **€PROOF** — Proof Token (certificate)',
+        '· **€CERT** — Certificate of Audit Revenue',
+        '',
         '**Financial layer:**',
-        '· **€ESCR** — Escrow (trust layer)',
-        '· **€DLCT** — Tokenized DLC (trade finance)',
-        '· **€SBLCT** — Standby LC Token (you are here)',
-        '· **€BRKR** — Broker Commission Protection',
+        '· **€ESCR** — Escrow',
+        '· **€DLCT** — Tokenized Documentary LC',
+        '· **€LUMP** — Lump Sum (fixed commission)',
+        '· **€SBLCT** — Standby LC (you are here)',
         '',
-        '**Aircraft layer (10 tokens):**',
-        '€B787 · €A350 · €C929 · €A220 · €E195',
-        '€737MAX10 · €FAXX · €F22 · €CRJ900 · €IL96',
-        '',
-        'Built on Solana for speed and low fees.'
+        '**Aircraft layer:**',
+        '€B787 · €A350 · €C929 · €A220 · €E195 · €IL96'
       ].join('\n')
     },
     'risk': {
@@ -130,10 +142,10 @@
 
   var SUGGESTIONS = [
     { key: 'what',      label: '🛡️ What is €SBLCT?' },
-    { key: 'buy',       label: '🛒 How to buy?' },
-    { key: 'contract',  label: '🔗 Contract' },
-    { key: 'price',     label: '💰 Price & Target' },
     { key: 'sblc',      label: '📋 What is an SBLC?' },
+    { key: 'buy',       label: '🛒 How to buy?' },
+    { key: 'contract',  label: '🔗 Contract & Pool' },
+    { key: 'price',     label: '💰 Price & Target' },
     { key: 'ecosystem', label: '🌍 AviaTrust' },
     { key: 'risk',      label: '⚠️ Is it risky?' }
   ];
@@ -162,7 +174,7 @@
       '<div class="avia-messages" id="avia-messages"></div>',
       '<div class="avia-suggestions" id="avia-suggestions"></div>',
       '<div class="avia-external">',
-      '  <a href="https://jup.ag/tokens/SBLCTContractAddressHere" target="_blank">🔄 Jupiter</a>',
+      '  <a href="https://jup.ag/tokens/' + CONTRACT + '" target="_blank">🔄 Jupiter</a>',
       '  <a href="https://t.me/aviatrust" target="_blank">📱 TG</a>',
       '  <a href="https://x.com/aviatrust" target="_blank">🐦 X</a>',
       '</div>',
